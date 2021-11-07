@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  nginx:
+    container_name: proxy
+    image: my-proxy
+    build:
+      context: ./dockerfiles/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - "backend"
+    restart: always
+  backend:
+    container_name: api
+    image: nestjs-api
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: ./dockerfiles/backend/Dockerfile
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/api
+      - /usr/src/api/node_modules
+    restart: unless-stopped
+    depends_on:
+      - "db"
+  db:
+    container_name: app-db
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+networks:
+  default:
+    driver: bridge
