@@ -3,9 +3,10 @@ Nest js interview task
 
 Steps to reproduce
 1. Clone project
-2. Start containers with docker-compose up --build -d command
-3. Import postman collection and environment (for http requests)
-4. Open demo.html via browser (for server sent events)
+2. Move to project folder and run npm i command
+3. Start containers with docker-compose up --build -d command
+4. Import postman collection and environment (for http requests)
+5. Open demo.html via browser (for server sent events)
 
 After making http request from postman we can see changes(events) in browser
 
