@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script>
+      const eventSource = new EventSource('http://localhost/users/sse');
+
+      function showNewEvent(event) {
+        const newItem = document.createElement('li');
+        const eventName = document.createElement('div');
+        const eventData = document.createElement('div');
+
+        eventName.innerHTML = `event: ${event.type}`;
+        eventData.innerHTML = `data: ${event.data}`;
+
+        newItem.appendChild(eventName);
+        newItem.appendChild(eventData);
+
+        document.getElementById("events").appendChild(newItem);
+      }
+
+      eventSource.addEventListener('userAdded', showNewEvent);
+      eventSource.addEventListener('userUpdated', showNewEvent);
+      eventSource.addEventListener('userDeleted', showNewEvent);
+    </script>
+  </head>
+  <body>
+    <ul id="events">
+
+    </ul>
+  </body>
+</html>

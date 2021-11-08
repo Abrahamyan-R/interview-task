@@ -14,8 +14,6 @@ services:
   backend:
     container_name: api
     image: nestjs-api
-    ports:
-      - "3000:3000"
     build:
       context: .
       dockerfile: ./dockerfiles/backend/Dockerfile
